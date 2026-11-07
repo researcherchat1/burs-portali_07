@@ -1,0 +1,4 @@
+# Axtarış və indeks bu qovluqlara girməsin.
+# Fayllar lazım olanda birbaşa açıla bilər.
+node_modules/
+.next/
