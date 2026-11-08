@@ -44,7 +44,7 @@ export const Section = (props: {
           <Link
             href={props.descriptionHref}
             className={cn(
-              'mt-4 inline-flex rounded-md border border-foreground/20 px-5 py-2 text-lg text-foreground transition-colors hover:border-foreground/45',
+              'mt-4 inline-flex rounded-md border-2 border-foreground/20 px-5 py-2 text-lg text-foreground transition-colors hover:border-foreground/45',
               props.descriptionClassName,
             )}
           >

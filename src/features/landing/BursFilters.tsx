@@ -7,6 +7,8 @@ import { buttonVariants } from '@/components/ui/buttonVariants'
 import { cn } from '@/utilities/ui'
 import type { educationLevelOptions } from '@/utilities/burslar'
 
+import { FilterSelect } from './FilterSelect'
+
 type CategoryOption = { id: string; title: string }
 type LevelOption = (typeof educationLevelOptions)[number]
 
@@ -16,9 +18,6 @@ type Props = {
   educationLevels: LevelOption[]
   resultCount: number
 }
-
-const selectClass =
-  'h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground'
 
 /** URL query filter — localStorage yox; server Payload where ilə işləyir. */
 export function BursFilters(props: Props) {
@@ -48,66 +47,33 @@ export function BursFilters(props: Props) {
   return (
     <div className="mb-10">
       <div className="grid grid-cols-1 gap-3 @md:grid-cols-2 @4xl:grid-cols-4">
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Ölkə</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('country') || ''}
-            onChange={(e) => apply('country', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.countries.map((c) => (
-              <option key={c} value={c}>
-                {c}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Kateqoriya</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('category') || ''}
-            onChange={(e) => apply('category', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.title}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Təhsil səviyyəsi</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('level') || ''}
-            onChange={(e) => apply('level', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.educationLevels.map((l) => (
-              <option key={l.value} value={l.value}>
-                {l.label}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Deadline</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('deadline') || ''}
-            onChange={(e) => apply('deadline', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            <option value="upcoming">Aktiv (gələcək)</option>
-            <option value="past">Keçmiş</option>
-          </select>
-        </label>
+        <FilterSelect
+          label="Ölkə"
+          value={searchParams.get('country') || ''}
+          onChange={(value) => apply('country', value)}
+          options={props.countries.map((c) => ({ value: c, label: c }))}
+        />
+        <FilterSelect
+          label="Kateqoriya"
+          value={searchParams.get('category') || ''}
+          onChange={(value) => apply('category', value)}
+          options={props.categories.map((c) => ({ value: c.id, label: c.title }))}
+        />
+        <FilterSelect
+          label="Təhsil səviyyəsi"
+          value={searchParams.get('level') || ''}
+          onChange={(value) => apply('level', value)}
+          options={props.educationLevels.map((l) => ({ value: l.value, label: l.label }))}
+        />
+        <FilterSelect
+          label="Deadline"
+          value={searchParams.get('deadline') || ''}
+          onChange={(value) => apply('deadline', value)}
+          options={[
+            { value: 'upcoming', label: 'Aktiv (gələcək)' },
+            { value: 'past', label: 'Keçmiş' },
+          ]}
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">

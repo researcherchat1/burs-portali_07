@@ -43,8 +43,9 @@ export const BursCard = (props: {
   className?: string
   signedIn?: boolean
   saved?: boolean
+  saveClassName?: string
 }) => {
-  const { burs, className, signedIn = false, saved = false } = props
+  const { burs, className, signedIn = false, saved = false, saveClassName } = props
   const href = burs.href || `/burslar/${burs.slug}`
   const level = educationLevelLabels[burs.educationLevel] || burs.educationLevel
   const deadline = formatDeadline(burs.deadline)
@@ -52,7 +53,7 @@ export const BursCard = (props: {
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background text-left',
+        'flex h-full flex-col overflow-hidden rounded-xl border border-[#c4568c] bg-background text-left',
         className,
       )}
     >
@@ -104,7 +105,7 @@ export const BursCard = (props: {
       </Link>
 
       <div className="px-5 pb-5">
-        <SaveBursButton slug={burs.slug} saved={saved} signedIn={signedIn} />
+        <SaveBursButton slug={burs.slug} saved={saved} signedIn={signedIn} className={saveClassName} />
       </div>
     </div>
   )

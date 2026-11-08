@@ -25,7 +25,10 @@ export async function KurslarSection() {
           emptyMessage="Hələ yayımlanmış kurs yoxdur. Admin → Kurslar-dan əlavə edib Publish edin."
         />
         <div className="mx-auto max-w-5xl px-3 pb-10 text-center">
-          <Link href="/kurslar" className={cn(buttonVariants({ variant: 'outline' }))}>
+          <Link
+            href="/kurslar"
+            className={cn(buttonVariants({ variant: 'outline' }), 'border-[#c4568c] dark:border-[#c4568c]')}
+          >
             Bütün kurslara bax
           </Link>
         </div>

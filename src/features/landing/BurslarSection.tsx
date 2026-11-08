@@ -20,6 +20,7 @@ export async function BurslarSection() {
           items={items}
           signedIn={saveState.signedIn}
           savedSlugs={saveState.slugs}
+          saveClassName="border border-[#c4568c] dark:border-[#c4568c]"
           title="Burslar"
           accentTitle
           description="Tam siyahı üçün bütün burslara baxın."
@@ -28,7 +29,10 @@ export async function BurslarSection() {
           emptyMessage="Hələ yayımlanmış burs yoxdur. Admin → Burslar-dan əlavə edib Publish edin."
         />
         <div className="mx-auto max-w-5xl px-3 pb-10 text-center">
-          <Link href="/burslar" className={cn(buttonVariants({ variant: 'outline' }))}>
+          <Link
+            href="/burslar"
+            className={cn(buttonVariants({ variant: 'outline' }), 'border-[#c4568c] dark:border-[#c4568c]')}
+          >
             Bütün burslara bax
           </Link>
         </div>

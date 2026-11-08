@@ -211,6 +211,24 @@
   }
   body {
     @apply bg-background text-foreground min-h-[100vh] flex flex-col;
+    background-image: linear-gradient(rgb(255 255 255 / 90%), rgb(255 255 255 / 90%)), url('/arxa-fon/23.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
+  }
+
+  body:has(#burs-hero) {
+    background-image: linear-gradient(rgb(255 255 255 / 80%), rgb(255 255 255 / 80%)), url('/arxa-fon/23.jpg');
+  }
+
+  footer {
+    background-color: transparent;
+    background-image: linear-gradient(rgb(255 255 255 / 90%), rgb(255 255 255 / 90%)), url('/arxa-fon/23.jpg');
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    background-attachment: fixed;
   }
 }
 

@@ -7,6 +7,8 @@ import { buttonVariants } from '@/components/ui/buttonVariants'
 import { cn } from '@/utilities/ui'
 import type { languageOptions } from '@/utilities/kurslar'
 
+import { FilterSelect } from './FilterSelect'
+
 type CategoryOption = { id: string; title: string }
 type LanguageOption = (typeof languageOptions)[number]
 
@@ -16,9 +18,6 @@ type Props = {
   languages: LanguageOption[]
   resultCount: number
 }
-
-const selectClass =
-  'h-10 w-full rounded-md border border-border bg-background px-3 text-sm text-foreground'
 
 /** URL query filter. Saxlama yoxdur; server Payload where ilə işləyir. */
 export function KursFilters(props: Props) {
@@ -45,53 +44,24 @@ export function KursFilters(props: Props) {
   return (
     <div className="mb-10">
       <div className="grid grid-cols-1 gap-3 @md:grid-cols-2 @4xl:grid-cols-3">
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Universitet / mənbə</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('university') || ''}
-            onChange={(e) => apply('university', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.universities.map((u) => (
-              <option key={u} value={u}>
-                {u}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Kateqoriya</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('category') || ''}
-            onChange={(e) => apply('category', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.categories.map((c) => (
-              <option key={c.id} value={c.id}>
-                {c.title}
-              </option>
-            ))}
-          </select>
-        </label>
-
-        <label className="block text-left text-sm">
-          <span className="mb-1 block text-muted-foreground">Dil</span>
-          <select
-            className={selectClass}
-            value={searchParams.get('language') || ''}
-            onChange={(e) => apply('language', e.target.value)}
-          >
-            <option value="">Hamısı</option>
-            {props.languages.map((l) => (
-              <option key={l.value} value={l.value}>
-                {l.label}
-              </option>
-            ))}
-          </select>
-        </label>
+        <FilterSelect
+          label="Universitet / mənbə"
+          value={searchParams.get('university') || ''}
+          onChange={(value) => apply('university', value)}
+          options={props.universities.map((u) => ({ value: u, label: u }))}
+        />
+        <FilterSelect
+          label="Kateqoriya"
+          value={searchParams.get('category') || ''}
+          onChange={(value) => apply('category', value)}
+          options={props.categories.map((c) => ({ value: c.id, label: c.title }))}
+        />
+        <FilterSelect
+          label="Dil"
+          value={searchParams.get('language') || ''}
+          onChange={(value) => apply('language', value)}
+          options={props.languages.map((l) => ({ value: l.value, label: l.label }))}
+        />
       </div>
 
       <div className="mt-4 flex flex-wrap items-center justify-between gap-3 text-sm text-muted-foreground">

@@ -33,7 +33,7 @@ export function Navbar(props: { signedIn?: boolean }) {
   )
 
   return (
-    <Section className="px-3 py-6">
+    <Section className="px-3 pt-9 pb-6">
       <CenteredMenu logo={<SiteBrand />} rightMenu={rightMenu}>
         <li>
           <Link href="/" aria-label="Əsas">

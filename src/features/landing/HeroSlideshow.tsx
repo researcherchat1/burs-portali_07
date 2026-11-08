@@ -82,7 +82,7 @@ export function HeroSlideshow(props: { slides: HeroSlide[] }) {
       id="burs-hero"
       aria-label="Burs Portalı"
       aria-roledescription="carousel"
-      className="relative overflow-hidden bg-neutral-950 min-[1440px]:mx-[max(0.75rem,calc(50%-48rem))] min-[1440px]:rounded-xl"
+      className="relative mt-10 overflow-hidden bg-neutral-950 min-[1440px]:mx-[max(0.75rem,calc(50%-48rem))] min-[1440px]:rounded-xl"
     >
       {slides.map((slide, index) => (
         <div key={`${slide.title}-${index}`} data-hero-slide hidden={index !== 0 ? true : undefined} className="relative">
@@ -105,7 +105,7 @@ export function HeroSlideshow(props: { slides: HeroSlide[] }) {
               data-hero-dot={index}
               aria-label={`Slayd ${index + 1}`}
               aria-current={index === 0 ? 'true' : undefined}
-              className="h-2.5 w-2.5 rounded-full bg-white/45 transition-all hover:bg-white/70 aria-current:w-8 aria-current:bg-white"
+              className="h-2.5 w-2.5 rounded-full border border-[#c4568c] bg-white/45 transition-all hover:bg-white/70 aria-current:w-8 aria-current:bg-white"
             />
           ))}
         </div>

@@ -8,6 +8,9 @@ next-env.d.ts
 
 # Müvəqqəti admin şifrəsi olan yerli qeyd
 development-desk.md
+
+# Namizəd fon şəkilləri. Saytın göstərdiyi nüsxə public/arxa-fon içindədir.
+/arxa-fon/
 .vercel
 
 # Payload default media upload directory

@@ -16,6 +16,7 @@ type Props = {
   className?: string
   signedIn?: boolean
   savedSlugs?: string[]
+  saveClassName?: string
 }
 
 /** SaaS Features grid — Payload burs siyahısı üçün shell (Dilim C data bağlayacaq). */
@@ -33,6 +34,7 @@ export const BursGrid = (props: Props) => {
     descriptionHref,
     signedIn = false,
     savedSlugs = [],
+    saveClassName,
   } = props
   const saved = new Set(savedSlugs)
 
@@ -63,6 +65,7 @@ export const BursGrid = (props: Props) => {
               burs={burs}
               signedIn={signedIn}
               saved={saved.has(burs.slug)}
+              saveClassName={saveClassName}
             />
           ))}
         </div>

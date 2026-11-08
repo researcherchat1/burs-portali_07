@@ -16,7 +16,7 @@ export const KursCard = (props: { kurs: KursCardData; className?: string }) => {
   return (
     <div
       className={cn(
-        'flex h-full flex-col overflow-hidden rounded-xl border border-border bg-background text-left',
+        'flex h-full flex-col overflow-hidden rounded-xl border border-[#c4568c] bg-background text-left',
         className,
       )}
     >
