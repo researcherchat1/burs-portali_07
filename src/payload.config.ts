@@ -1,4 +1,5 @@
 import { mongooseAdapter } from '@payloadcms/db-mongodb'
+import { nodemailerAdapter } from '@payloadcms/email-nodemailer'
 import sharp from 'sharp'
 import path from 'path'
 import { buildConfig, PayloadRequest } from 'payload'
@@ -26,6 +27,27 @@ import { getServerSideURL } from './utilities/getURL'
 
 const filename = fileURLToPath(import.meta.url)
 const dirname = path.dirname(filename)
+
+function brevoEmail() {
+  const host = process.env.SMTP_HOST?.trim()
+  const user = process.env.SMTP_USER?.trim()
+  const pass = process.env.SMTP_PASS?.trim()
+  const from = process.env.SMTP_FROM?.trim()
+  const port = Number(process.env.SMTP_PORT)
+  if (!host || !user || !pass || !from || !Number.isFinite(port)) return undefined
+
+  return nodemailerAdapter({
+    defaultFromAddress: from,
+    defaultFromName: process.env.SMTP_FROM_NAME?.trim() || 'Burslar platform',
+    skipVerify: true,
+    transportOptions: {
+      host,
+      port,
+      secure: false,
+      auth: { user, pass },
+    },
+  })
+}
 
 export default buildConfig({
   admin: {
@@ -73,6 +95,7 @@ export default buildConfig({
   cors: [getServerSideURL()].filter(Boolean),
   globals: [Header, Footer, Pricing, FAQ, Sponsors, Hero],
   plugins,
+  email: brevoEmail(),
   secret: process.env.PAYLOAD_SECRET,
   sharp,
   typescript: {

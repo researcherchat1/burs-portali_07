@@ -274,7 +274,7 @@ export const seed = async ({
               {
                 link: {
                   type: 'custom',
-                  label: 'Əlaqə səhifəsi',
+                  label: 'Əlaqə',
                   url: '/elaqe',
                 },
               },

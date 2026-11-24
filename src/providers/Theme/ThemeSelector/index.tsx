@@ -1,8 +1,15 @@
 import { ChevronDown } from 'lucide-react'
 import React from 'react'
 
+import { darkModeEnabled } from '../shared'
+
 const themeScript = `
 (function () {
+  if (!${darkModeEnabled}) {
+    document.documentElement.setAttribute('data-theme', 'light')
+    return
+  }
+
   var sel = document.getElementById('burs-theme')
   if (!sel || sel.getAttribute('data-bound') === 'yes') return
   sel.setAttribute('data-bound', 'yes')

@@ -5,7 +5,7 @@ import React, { createContext, useCallback, use, useEffect, useState } from 'rea
 import type { Theme, ThemeContextType } from './types'
 
 import canUseDOM from '@/utilities/canUseDOM'
-import { defaultTheme, getImplicitPreference, themeLocalStorageKey } from './shared'
+import { darkModeEnabled, defaultTheme, getImplicitPreference, themeLocalStorageKey } from './shared'
 import { themeIsValid } from './types'
 
 const initialContext: ThemeContextType = {
@@ -21,6 +21,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   )
 
   const setTheme = useCallback((themeToSet: Theme | null) => {
+    if (!darkModeEnabled) {
+      document.documentElement.setAttribute('data-theme', 'light')
+      setThemeState('light')
+      return
+    }
+
     if (themeToSet === null) {
       window.localStorage.removeItem(themeLocalStorageKey)
       const implicitPreference = getImplicitPreference()
@@ -34,6 +40,12 @@ export const ThemeProvider = ({ children }: { children: React.ReactNode }) => {
   }, [])
 
   useEffect(() => {
+    if (!darkModeEnabled) {
+      document.documentElement.setAttribute('data-theme', 'light')
+      setThemeState('light')
+      return
+    }
+
     let themeToSet: Theme = defaultTheme
     const preference = window.localStorage.getItem(themeLocalStorageKey)
 

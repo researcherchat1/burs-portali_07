@@ -17,6 +17,8 @@ const heroScript = `
 
   var slides = [].slice.call(root.querySelectorAll('[data-hero-slide]'))
   var dots = [].slice.call(root.querySelectorAll('[data-hero-dot]'))
+  var prev = root.querySelector('[data-hero-prev]')
+  var next = root.querySelector('[data-hero-next]')
   var index = 0
   var timer = 0
 
@@ -41,12 +43,13 @@ const heroScript = `
     }, 8000)
   }
 
-  dots.forEach(function (el, i) {
-    el.addEventListener('click', function () {
-      show(i)
-      start()
-    })
-  })
+  function step(delta) {
+    show((index + delta + slides.length) % slides.length)
+    start()
+  }
+
+  if (prev) prev.addEventListener('click', function () { step(-1) })
+  if (next) next.addEventListener('click', function () { step(1) })
 
   start()
 })()
@@ -97,18 +100,41 @@ export function HeroSlideshow(props: { slides: HeroSlide[] }) {
       ))}
 
       {slides.length > 1 ? (
-        <div className="absolute inset-x-0 bottom-10 flex items-center justify-center gap-2">
-          {slides.map((slide, index) => (
-            <button
-              key={`${slide.title}-dot-${index}`}
-              type="button"
-              data-hero-dot={index}
-              aria-label={`Slayd ${index + 1}`}
-              aria-current={index === 0 ? 'true' : undefined}
-              className="h-2.5 w-2.5 rounded-full border border-[#c4568c] bg-white/45 transition-all hover:bg-white/70 aria-current:w-8 aria-current:bg-white"
-            />
-          ))}
-        </div>
+        <>
+          <button
+            type="button"
+            data-hero-prev
+            aria-label="Əvvəlki slayd"
+            className="absolute top-1/2 left-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white transition-colors hover:bg-white/35 md:left-5"
+            style={{ transform: 'translateY(-50%)' }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden className="size-6" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M15 18l-6-6 6-6" />
+            </svg>
+          </button>
+          <button
+            type="button"
+            data-hero-next
+            aria-label="Növbəti slayd"
+            className="absolute top-1/2 right-3 z-10 flex size-11 -translate-y-1/2 items-center justify-center rounded-full bg-white/20 text-white transition-colors hover:bg-white/35 md:right-5"
+            style={{ transform: 'translateY(-50%)' }}
+          >
+            <svg viewBox="0 0 24 24" aria-hidden className="size-6" fill="none" stroke="currentColor" strokeWidth="2">
+              <path d="M9 18l6-6-6-6" />
+            </svg>
+          </button>
+          <div className="pointer-events-none absolute inset-x-0 bottom-10 flex items-center justify-center gap-2">
+            {slides.map((slide, index) => (
+              <span
+                key={`${slide.title}-dot-${index}`}
+                data-hero-dot={index}
+                aria-hidden
+                aria-current={index === 0 ? 'true' : undefined}
+                className="h-2.5 w-2.5 rounded-full border border-[#c4568c] bg-white/45 aria-current:w-8 aria-current:bg-white"
+              />
+            ))}
+          </div>
+        </>
       ) : null}
 
       <script dangerouslySetInnerHTML={{ __html: heroScript }} />

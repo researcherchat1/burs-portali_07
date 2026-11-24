@@ -9,6 +9,9 @@ next-env.d.ts
 # Müvəqqəti admin şifrəsi olan yerli qeyd
 development-desk.md
 
+# online.az girişi və domen qeydi
+stra_creds.md
+
 # Namizəd fon şəkilləri. Saytın göstərdiyi nüsxə public/arxa-fon içindədir.
 /arxa-fon/
 .vercel

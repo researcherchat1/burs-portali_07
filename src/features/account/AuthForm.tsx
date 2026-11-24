@@ -101,6 +101,14 @@ export function AuthForm(props: {
         {pending ? 'Gözləyin…' : props.mode === 'login' ? 'Giriş' : 'Qeydiyyat'}
       </button>
 
+      {props.mode === 'login' ? (
+        <p className="text-center text-sm text-muted-foreground">
+          <Link href="/sifreni-unutdum" className="underline">
+            Şifrəni unutmusan?
+          </Link>
+        </p>
+      ) : null}
+
       <p className="text-center text-sm text-muted-foreground">
         {props.mode === 'login' ? (
           <Link href="/qeydiyyat" className="underline">

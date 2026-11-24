@@ -11,6 +11,7 @@ import { getMusteri } from '@/features/account/session'
 import { Navbar } from '@/features/landing/Navbar'
 import { Providers } from '@/providers'
 import { InitTheme } from '@/providers/Theme/InitTheme'
+import { darkModeEnabled } from '@/providers/Theme/shared'
 import { mergeOpenGraph } from '@/utilities/mergeOpenGraph'
 import { draftMode } from 'next/headers'
 
@@ -22,7 +23,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
   const musteri = await getMusteri()
 
   return (
-    <html className={cn(GeistSans.variable, GeistMono.variable)} lang="az" suppressHydrationWarning>
+    <html
+      className={cn(GeistSans.variable, GeistMono.variable)}
+      lang="az"
+      suppressHydrationWarning
+      {...(darkModeEnabled ? {} : { 'data-theme': 'light' })}
+    >
       <head>
         <InitTheme />
         <link href="/favicon.ico" rel="icon" sizes="32x32" />

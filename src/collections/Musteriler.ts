@@ -1,5 +1,7 @@
 import type { CollectionConfig } from 'payload'
 
+import { passwordResetUrl } from '@/features/account/resetUrl'
+
 import { anyone } from '../access/anyone'
 import { adminOrSelf, isAdminUser } from '../access/musteri'
 
@@ -13,7 +15,15 @@ export const Musteriler: CollectionConfig = {
     singular: 'Müştəri',
     plural: 'Müştərilər',
   },
-  auth: true,
+  auth: {
+    forgotPassword: {
+      generateEmailSubject: () => 'Şifrəni bərpa et',
+      generateEmailHTML: ({ token }) => {
+        const url = passwordResetUrl(token || '')
+        return `<p>Şifrənizi yeniləmək üçün linkə keçin.</p><p><a href="${url}">${url}</a></p><p>Link təxminən 1 saat etibarlıdır. Bu istəyi siz göndərməmisinizsə, məktubu nəzərə almayın.</p>`
+      },
+    },
+  },
   access: {
     admin: () => false,
     create: anyone,

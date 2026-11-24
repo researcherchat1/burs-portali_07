@@ -36,6 +36,15 @@
 @source inline("bg-success/30");
 @source inline("border-warning");
 @source inline("bg-warning/30");
+@source inline("top-1/2");
+@source inline("left-3");
+@source inline("right-3");
+@source inline("size-11");
+@source inline("-translate-y-1/2");
+@source inline("bg-white/20");
+@source inline("hover:bg-white/35");
+@source inline("md:left-5");
+@source inline("md:right-5");
 
 @theme {
   --breakpoint-sm: 40rem;

@@ -2,10 +2,16 @@
 
 import React, { useSyncExternalStore } from 'react'
 
+import { darkModeEnabled } from '../shared'
 import { defaultTheme, themeLocalStorageKey } from '../ThemeSelector/types'
 
 const themeInitScript = `
 (function () {
+  if (!${darkModeEnabled}) {
+    document.documentElement.setAttribute('data-theme', 'light')
+    return
+  }
+
   function getImplicitPreference() {
     var mediaQuery = '(prefers-color-scheme: dark)'
     var mql = window.matchMedia(mediaQuery)
